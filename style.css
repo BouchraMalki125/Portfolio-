@@ -1,38 +1,38 @@
 /* ============================================
    BOUCHRA MALKI — CYBER SECURITY PORTFOLIO
    Design System & Global Styles
-   Color Palette: Deep Navy, Teal/Cyan, White
-   Inspired by geometric network patterns
+   Color Palette: Deep Dark, Soft Teal/Mint, Warm Gold
+   Inspired by profile photo — turquoise circle + cream hijab patterns
    ============================================ */
 
 /* ---------- CSS Custom Properties ---------- */
 :root {
-    /* Primary Colors — Deep Navy & Cyber Teal */
-    --bg-primary: #06090f;
-    --bg-secondary: #0b1120;
-    --bg-tertiary: #111827;
-    --bg-card: rgba(17, 24, 39, 0.7);
-    --bg-card-hover: rgba(20, 30, 55, 0.85);
-    --bg-glass: rgba(11, 17, 32, 0.6);
+    /* Primary Colors — Elegant Dark */
+    --bg-primary: #0a0e14;
+    --bg-secondary: #0f1520;
+    --bg-tertiary: #151d2b;
+    --bg-card: rgba(15, 21, 32, 0.75);
+    --bg-card-hover: rgba(21, 29, 43, 0.9);
+    --bg-glass: rgba(10, 14, 20, 0.65);
 
-    /* Accent Colors — Teal/Cyan inspired by profile */
-    --accent-primary: #06b6d4;
-    --accent-secondary: #22d3ee;
-    --accent-glow: rgba(6, 182, 212, 0.3);
-    --accent-soft: rgba(6, 182, 212, 0.08);
-    --accent-gradient: linear-gradient(135deg, #06b6d4, #0ea5e9, #38bdf8);
-    --accent-gradient-vibrant: linear-gradient(135deg, #06b6d4, #8b5cf6);
+    /* Accent Colors — Soft Teal/Mint + Warm Gold */
+    --accent-primary: #5eead4;
+    --accent-secondary: #99f6e4;
+    --accent-glow: rgba(94, 234, 212, 0.25);
+    --accent-soft: rgba(94, 234, 212, 0.07);
+    --accent-gradient: linear-gradient(135deg, #5eead4, #2dd4bf, #14b8a6);
+    --accent-gradient-vibrant: linear-gradient(135deg, #5eead4, #d4a574);
 
     /* Text Colors */
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
+    --text-primary: #f0ece6;
+    --text-secondary: #a0aec0;
     --text-muted: #64748b;
-    --text-accent: #22d3ee;
+    --text-accent: #d4a574;
 
     /* Borders */
-    --border-subtle: rgba(148, 163, 184, 0.08);
-    --border-accent: rgba(6, 182, 212, 0.2);
-    --border-hover: rgba(6, 182, 212, 0.4);
+    --border-subtle: rgba(160, 174, 192, 0.08);
+    --border-accent: rgba(94, 234, 212, 0.2);
+    --border-hover: rgba(94, 234, 212, 0.4);
 
     /* Typography */
     --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -48,9 +48,9 @@
     --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     /* Shadows */
-    --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 40px rgba(6, 182, 212, 0.15);
-    --shadow-hover: 0 8px 40px rgba(6, 182, 212, 0.2);
+    --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.35);
+    --shadow-glow: 0 0 40px rgba(94, 234, 212, 0.12);
+    --shadow-hover: 0 8px 40px rgba(94, 234, 212, 0.18);
 }
 
 /* ---------- Reset & Base ---------- */
@@ -535,7 +535,7 @@ a {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--accent-primary);
-    box-shadow: 0 0 60px rgba(6, 182, 212, 0.2);
+    box-shadow: 0 0 60px var(--accent-glow);
     position: relative;
     z-index: 2;
     transition: var(--transition-smooth);
@@ -543,7 +543,7 @@ a {
 
 .hero-image:hover {
     transform: scale(1.03);
-    box-shadow: 0 0 80px rgba(6, 182, 212, 0.35);
+    box-shadow: 0 0 80px rgba(94, 234, 212, 0.45);
 }
 
 /* Orbit Rings */
@@ -589,7 +589,7 @@ a {
     font-size: 1.5rem;
     z-index: 3;
     animation: float 6s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
+    filter: drop-shadow(0 0 10px var(--accent-glow));
 }
 
 .fi-1 { top: 0; left: 50%; animation-delay: 0s; }
