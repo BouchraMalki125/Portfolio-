@@ -6,14 +6,14 @@ A premium, custom dark-themed portfolio website built for showcasing my journey 
 Visit my live site: [https://bouchramalki125.github.io/Portfolio-/](https://bouchramalki125.github.io/Portfolio-/)
 
 ## ✨ Features
-- 🎨 Custom dark cyber theme with soft floating bubbles background (inspired by profile photo tones)
-- 📱 Fully responsive design (optimized to prevent elements overlapping on mobile screens)
+- 🎨 Custom dark cyber theme with soft floating bubbles background 
+- 📱 Fully responsive design 
 - ⚡ Smooth scroll animations & parallax effects
-- 🔍 Project filtering by category (Crypto & PKI, Security & IDS)
+- 🔍 Project filtering by category 
 - 📊 Animated skill progress bars
-- 🎓 Interactive education timeline & academic projects (TIPE, IDS log analyzer, secure mail server)
+- 🎓 Interactive education timeline & academic projects 
 - ✍️ Medium article preview section integration
-- ✉️ Contact section and social links (GitHub, LinkedIn, Medium)
+- ✉️ Contact section and social links 
 
 ## 🛠️ Built With
 - HTML5
@@ -31,18 +31,6 @@ portfolio/
 │   └── profile.jpg     # Profile photo
 └── README.md
 ```
-
-## 🚀 Deployment on GitHub Pages
-1. Go to **Settings** → **Pages** on this repository
-2. Select **Source**: Deploy from a branch
-3. Select **Branch**: `main` and folder `/ (root)`
-4. Click **Save**
-5. Your site is live at: `https://bouchramalki125.github.io/Portfolio-/`
-
-## 📝 Customization
-- Replace `assets/profile.jpg` with your profile photo
-- Update content in `index.html` (projects, experience, skills, etc.)
-- Modify color tokens in `style.css` inside the `:root` variables block
 
 ## 📄 License
 © 2025 Bouchra MALKI. All rights reserved.
