@@ -27,10 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.radius = Math.random() * 2 + 1;
-            this.opacity = Math.random() * 0.5 + 0.2;
+            // Slower, smoother floating motion
+            this.vx = (Math.random() - 0.5) * 0.3;
+            this.vy = (Math.random() - 0.5) * 0.3;
+            // Bigger bubble sizes
+            this.radius = Math.random() * 8 + 3;
+            this.opacity = Math.random() * 0.15 + 0.05;
+            // Alternate colors between soft teal (from the photo ring) and warm gold (from hijab details)
+            this.color = Math.random() > 0.4 ? '94, 234, 212' : '212, 165, 116';
         }
 
         update() {
@@ -40,14 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
             if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
 
-            // Mouse interaction
+            // Smooth mouse pushing effect
             if (mouse.x !== null) {
                 const dx = this.x - mouse.x;
                 const dy = this.y - mouse.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 150) {
-                    this.x += dx * 0.01;
-                    this.y += dy * 0.01;
+                if (dist < 200) {
+                    this.x += dx * 0.005;
+                    this.y += dy * 0.005;
                 }
             }
         }
@@ -55,37 +59,35 @@ document.addEventListener('DOMContentLoaded', () => {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(6, 182, 212, ${this.opacity})`;
+            // Soft gradient highlight inside the bubble
+            const gradient = ctx.createRadialGradient(
+                this.x - this.radius * 0.3,
+                this.y - this.radius * 0.3,
+                this.radius * 0.1,
+                this.x,
+                this.y,
+                this.radius
+            );
+            gradient.addColorStop(0, `rgba(${this.color}, ${this.opacity * 1.5})`);
+            gradient.addColorStop(1, `rgba(${this.color}, 0)`);
+            
+            ctx.fillStyle = gradient;
             ctx.fill();
         }
     }
 
     function initParticles() {
         particles = [];
-        const count = Math.min(Math.floor((canvas.width * canvas.height) / 15000), 80);
+        // More bubbles since they are softer
+        const count = Math.min(Math.floor((canvas.width * canvas.height) / 10000), 120);
         for (let i = 0; i < count; i++) {
             particles.push(new Particle());
         }
     }
 
+    // Connections removed to make them look like clean floating bubbles
     function drawConnections() {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-
-                if (dist < 180) {
-                    const opacity = (1 - dist / 180) * 0.15;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(6, 182, 212, ${opacity})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
+        // Empty to keep bubbles floating independently
     }
 
     function animateCanvas() {
@@ -94,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             p.update();
             p.draw();
         });
-        drawConnections();
         animationId = requestAnimationFrame(animateCanvas);
     }
 
@@ -327,22 +328,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const btn = contactForm.querySelector('.btn-primary');
             const originalText = btn.innerHTML;
             
-            btn.innerHTML = `
-                <span>Message Sent! ✨</span>
-            `;
-            btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            btn.innerHTML = `<span>Sending... ⏳</span>`;
+            btn.disabled = true;
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    btn.innerHTML = `<span>Message Sent! ✨</span>`;
+                    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    contactForm.reset();
+                } else {
+                    btn.innerHTML = `<span>Error sending message!</span>`;
+                    btn.style.background = '#ef4444';
+                }
+            } catch (error) {
+                btn.innerHTML = `<span>Error sending message!</span>`;
+                btn.style.background = '#ef4444';
+            }
 
             setTimeout(() => {
                 btn.innerHTML = originalText;
                 btn.style.background = '';
-                contactForm.reset();
-            }, 3000);
+                btn.disabled = false;
+            }, 4000);
         });
     }
 
